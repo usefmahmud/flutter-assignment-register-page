@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lab_assignment/widgets/appbar.dart';
+import 'package:lab_assignment/widgets/index.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +22,9 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: CustomAppBar());
+    return Scaffold(
+      appBar: CustomAppBar(),
+      body: Center(child: Column(children: [SizedBox(height: 24), Header()])),
+    );
   }
 }
