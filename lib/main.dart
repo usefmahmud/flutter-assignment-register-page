@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab_assignment/widgets/appbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,23 +22,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(),
-        title: Center(
-          child: Text(
-            'Register',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.notifications_outlined),
-            onPressed: () {},
-          ),
-          IconButton(icon: Icon(Icons.search), onPressed: () => {}),
-        ],
-      ),
-    );
+    return Scaffold(appBar: CustomAppBar());
   }
 }
