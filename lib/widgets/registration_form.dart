@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lab_assignment/utils/form_validators.dart';
 import 'package:lab_assignment/utils/get_dropdown_countries.dart';
+import 'package:lab_assignment/widgets/custom_button.dart';
+import 'package:lab_assignment/widgets/form_action_buttonts.dart';
 import 'package:lab_assignment/widgets/index.dart';
 
 class RegistrationForm extends StatefulWidget {
@@ -105,7 +107,16 @@ class _RegistrationFormState extends State<RegistrationForm> {
               }),
             },
           ),
-          ElevatedButton(onPressed: _submitForm, child: Text('Register')),
+          SizedBox(height: 32),
+          FormActionButtons(
+            onSubmit: _submitForm,
+            onCancel: () {
+              _formKey.currentState?.reset();
+            },
+            onLogin: () {
+              print('Navigate to Login');
+            },
+          ),
         ],
       ),
     );
