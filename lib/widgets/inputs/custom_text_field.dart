@@ -50,6 +50,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ),
               )
             : null,
+        errorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+        ),
       ),
       obscureText: widget.type == TextFieldType.password && _obscureText,
       obscuringCharacter: '•',
