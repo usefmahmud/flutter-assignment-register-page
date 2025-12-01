@@ -12,6 +12,24 @@ class RegistrationForm extends StatefulWidget {
 class _RegistrationFormState extends State<RegistrationForm> {
   final _formKey = GlobalKey<FormState>();
 
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  String? selectedCountry;
+  String? selectedGender;
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    passwordController.dispose();
+    selectedCountry = null;
+    selectedGender = null;
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -24,22 +42,26 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 CustomTextField(
                   labelText: 'Name',
                   hintText: 'write your name...',
+                  controller: nameController,
                 ),
                 SizedBox(height: 16),
                 CustomTextField(
                   labelText: 'Email',
                   hintText: 'write your email...',
+                  controller: emailController,
                 ),
                 SizedBox(height: 16),
                 CustomTextField(
                   labelText: 'Phone',
                   hintText: 'write your phone...',
+                  controller: phoneController,
                 ),
                 SizedBox(height: 16),
                 CustomTextField(
                   labelText: 'Password',
                   hintText: 'write your password...',
                   type: TextFieldType.password,
+                  controller: passwordController,
                 ),
                 SizedBox(height: 16),
                 DropdownMenu(
@@ -48,6 +70,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   hintText: 'Select a country',
                   width: double.infinity,
                   menuHeight: 200,
+                  onSelected: (value) {
+                    setState(() {
+                      selectedCountry = value;
+                    });
+                  },
                 ),
                 SizedBox(height: 24),
                 RadioInput(
@@ -56,6 +83,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     RadioOption(label: 'Male', value: 'male'),
                     RadioOption(label: 'Female', value: 'female'),
                   ],
+                  onChanged: (value) => {
+                    setState(() {
+                      selectedGender = value;
+                    }),
+                  },
                 ),
               ],
             ),
