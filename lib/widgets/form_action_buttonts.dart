@@ -4,14 +4,14 @@ import 'package:lab_assignment/widgets/custom_button.dart';
 
 class FormActionButtons extends StatelessWidget {
   final VoidCallback onSubmit;
-  final VoidCallback onCancel;
-  final VoidCallback? onLogin;
+  final VoidCallback onGuestLogin;
+  final VoidCallback onLogin;
 
   const FormActionButtons({
     super.key,
     required this.onSubmit,
-    required this.onCancel,
-    this.onLogin,
+    required this.onGuestLogin,
+    required this.onLogin,
   });
 
   @override
@@ -20,7 +20,11 @@ class FormActionButtons extends StatelessWidget {
       children: [
         CustomButton(label: 'Register', onPressed: onSubmit),
         SizedBox(height: 16),
-        CustomButton(label: 'Cancel', onPressed: onCancel, outlined: true),
+        CustomButton(
+          label: 'Login as Guest',
+          onPressed: onGuestLogin,
+          outlined: true,
+        ),
         SizedBox(height: 22),
         RichText(
           text: TextSpan(

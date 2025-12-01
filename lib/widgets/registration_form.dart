@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lab_assignment/utils/form_validators.dart';
 import 'package:lab_assignment/utils/get_dropdown_countries.dart';
-import 'package:lab_assignment/widgets/custom_button.dart';
 import 'package:lab_assignment/widgets/form_action_buttonts.dart';
 import 'package:lab_assignment/widgets/index.dart';
 
@@ -34,7 +33,58 @@ class _RegistrationFormState extends State<RegistrationForm> {
   }
 
   void _submitForm() {
-    _formKey.currentState!.validate();
+    if (_formKey.currentState!.validate()) {
+      if (selectedCountry == null) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Please select a country')));
+        return;
+      }
+      if (selectedGender == null) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Please select a gender')));
+        return;
+      }
+
+      // Show popup with all details
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Registration Details'),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Name: ${nameController.text}'),
+                SizedBox(height: 8),
+                Text('Email: ${emailController.text}'),
+                SizedBox(height: 8),
+                Text('Phone: ${phoneController.text}'),
+                SizedBox(height: 8),
+                Text('Password: ${passwordController.text}'),
+                SizedBox(height: 8),
+                Text(
+                  'Country: ${getDropdownCountries().firstWhere((entry) => entry.value == selectedCountry).label}',
+                ),
+                SizedBox(height: 8),
+                Text('Gender: $selectedGender'),
+              ],
+            ),
+
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Close'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -110,8 +160,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
           SizedBox(height: 32),
           FormActionButtons(
             onSubmit: _submitForm,
-            onCancel: () {
-              _formKey.currentState?.reset();
+            onGuestLogin: () {
+              print('Login as Guest');
             },
             onLogin: () {
               print('Navigate to Login');
